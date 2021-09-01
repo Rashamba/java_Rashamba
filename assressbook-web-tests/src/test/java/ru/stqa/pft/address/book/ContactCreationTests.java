@@ -7,14 +7,14 @@ import org.testng.annotations.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
 
-public class ContactCreationTests {
+public class ContactCreationTests extends TestBase {
   private WebDriver wd;
 
   @BeforeMethod(alwaysRun = true)
   public void setUp() throws Exception {
     wd = new ChromeDriver();
     wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-    wd.get("http://localhost/addressbook/edit.php");
+    wd.get("http://localhost/addressbook");
     login("admin", "secret");
   }
 
