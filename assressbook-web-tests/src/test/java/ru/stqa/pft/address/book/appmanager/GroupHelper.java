@@ -20,6 +20,8 @@ public class GroupHelper {
   }
 
   public void fillGroupForm(GroupData groupData) {
+    wd.findElement(By.name("group_name")).click();
+    wd.findElement(By.name("group_name")).clear();
     wd.findElement(By.name("group_name")).sendKeys(groupData.getName());
     wd.findElement(By.name("group_header")).click();
     wd.findElement(By.name("group_header")).clear();
@@ -27,7 +29,6 @@ public class GroupHelper {
     wd.findElement(By.name("group_footer")).click();
     wd.findElement(By.name("group_footer")).clear();
     wd.findElement(By.name("group_footer")).sendKeys(groupData.getFooter());
-    wd.findElement(By.xpath("//form[@action='/addressbook/group.php']")).click();
   }
 
   public void initGroupCreation() {
