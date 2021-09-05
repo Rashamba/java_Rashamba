@@ -2,8 +2,6 @@ package ru.stqa.pft.address.book.appmanager;
 
 import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 import ru.stqa.pft.address.book.model.ContactData;
@@ -43,4 +41,23 @@ public class ContactHelper extends HelperBase{
     type(By.name("byear"), contactData.getByear());
   }
 
+  public void initContactModification() {
+    click(By.xpath("//img[@alt='Edit']"));
+  }
+
+  public void submitContactModification() {
+    click(By.name("update"));
+  }
+
+  public void selectContact() {
+    click(By.name("selected[]"));
+  }
+
+  public void deleteSelectedContact() {
+    click(By.xpath("//input[@value='Delete']"));
+  }
+
+  public void closeTheNotification() {
+    wd.switchTo().alert().accept();
+  }
 }
