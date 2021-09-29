@@ -26,7 +26,7 @@ public class ContactHelper extends HelperBase{
     click(By.xpath("//div[@id='content']/form/input[21]"));
   }
 
-  public void fillContactForm(@NotNull ContactData contactData, boolean creation) {
+  public void fillContactForm(@NotNull ContactData contactData) {
     type(By.name("firstname"), contactData.getFirstName());
     type(By.name("lastname"), contactData.getLastName());
     type(By.name("nickname"), contactData.getNickname());
@@ -42,11 +42,6 @@ public class ContactHelper extends HelperBase{
     new Select(wd.findElement(By.name("bmonth"))).selectByVisibleText(contactData.getBmonth());
     type(By.name("byear"), contactData.getByear());
 
-    if (creation) {
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
-    } else {
-      Assert.assertFalse(isElementPresent(By.name("new_group")));
-    }
   }
 
   public void initContactModification() {
