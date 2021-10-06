@@ -80,7 +80,7 @@ public class ContactHelper extends HelperBase{
     returnToContactPage();
   }
 
-  public void deleteContact(int index) {
+  public void delete(int index) {
     selectContact(index);
     deleteSelectedContact();
     closeTheNotification();
