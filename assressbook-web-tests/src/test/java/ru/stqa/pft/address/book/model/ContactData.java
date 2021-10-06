@@ -1,51 +1,19 @@
 package ru.stqa.pft.address.book.model;
 
 public class ContactData {
-  private int id;
-  private final String firstName;
-  private final String lastName;
-  private final String nickname;
-  private final String home;
-  private final String mobile;
-  private final String work;
-  private final String email;
-  private final String bday;
-  private final String bmonth;
-  private final String byear;
-  private final String address2;
-  private final String phone2;
-
-  public ContactData(int id, String firstName, String lastName, String nickname, String home, String mobile, String work, String email, String bday, String bmonth, String byear, String address2, String phone2) {
-    this.id = Integer.MAX_VALUE;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.nickname = nickname;
-    this.home = home;
-    this.mobile = mobile;
-    this.work = work;
-    this.email = email;
-    this.bday = bday;
-    this.bmonth = bmonth;
-    this.byear = byear;
-    this.address2 = address2;
-    this.phone2 = phone2;
-  }
-
-  public ContactData(String firstName, String lastName, String nickname, String home, String mobile, String work, String email, String bday, String bmonth, String byear, String address2, String phone2) {
-    this.id = 0;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.nickname = nickname;
-    this.home = home;
-    this.mobile = mobile;
-    this.work = work;
-    this.email = email;
-    this.bday = bday;
-    this.bmonth = bmonth;
-    this.byear = byear;
-    this.address2 = address2;
-    this.phone2 = phone2;
-  }
+  private int id = Integer.MAX_VALUE;
+  private String firstName;
+  private String lastName;
+  private String nickname;
+  private String home;
+  private String mobile;
+  private String work;
+  private String email;
+  private String bday;
+  private String bmonth;
+  private String byear;
+  private String address2;
+  private String phone2;
 
   public int getId() {
     return id;
@@ -126,8 +94,69 @@ public class ContactData {
     return result;
   }
 
-  public void setId(int id) {
+  public ContactData withId(int id) {
     this.id = id;
+    return this;
+  }
+
+  public ContactData withFirstName(String firstName) {
+    this.firstName = firstName;
+    return this;
+  }
+
+  public ContactData withLastName(String lastName) {
+    this.lastName = lastName;
+    return this;
+  }
+
+  public ContactData withNickname(String nickname) {
+    this.nickname = nickname;
+    return this;
+  }
+
+  public ContactData withHome(String home) {
+    this.home = home;
+    return this;
+  }
+
+  public ContactData withMobile(String mobile) {
+    this.mobile = mobile;
+    return this;
+  }
+
+  public ContactData withWork(String work) {
+    this.work = work;
+    return this;
+  }
+
+  public ContactData withEmail(String email) {
+    this.email = email;
+    return this;
+  }
+
+  public ContactData withBday(String bday) {
+    this.bday = bday;
+    return this;
+  }
+
+  public ContactData withBmonth(String bmonth) {
+    this.bmonth = bmonth;
+    return this;
+  }
+
+  public ContactData withByear(String byear) {
+    this.byear = byear;
+    return this;
+  }
+
+  public ContactData withAddress2(String address2) {
+    this.address2 = address2;
+    return this;
+  }
+
+  public ContactData withPhone2(String phone2) {
+    this.phone2 = phone2;
+    return this;
   }
 
 }
