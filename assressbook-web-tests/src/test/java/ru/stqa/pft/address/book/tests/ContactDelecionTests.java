@@ -20,14 +20,12 @@ public class ContactDelecionTests extends TestBase {
   public void testContactDelecion() {
     List<ContactData> before = app.getContactHelper().getContactList();
     int index = before.size() -1;
-    app.getContactHelper().selectContact(index);
-    app.getContactHelper().deleteSelectedContact();
-    app.getContactHelper().closeTheNotification();
-    app.getContactHelper().returnToContactPage();
+    app.getContactHelper().deleteContact(index);
     List<ContactData> after = app.getContactHelper().getContactList();
     Assert.assertEquals(after.size(), index);
 
     before.remove(index);
     Assert.assertEquals(before, after);
   }
+  
 }

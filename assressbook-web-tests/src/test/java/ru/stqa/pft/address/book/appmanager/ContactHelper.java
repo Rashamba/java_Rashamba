@@ -80,6 +80,13 @@ public class ContactHelper extends HelperBase{
     returnToContactPage();
   }
 
+  public void deleteContact(int index) {
+    selectContact(index);
+    deleteSelectedContact();
+    closeTheNotification();
+    returnToContactPage();
+  }
+
   public boolean isTheAContact() {
     return isElementPresent(By.name("selected[]"));
   }

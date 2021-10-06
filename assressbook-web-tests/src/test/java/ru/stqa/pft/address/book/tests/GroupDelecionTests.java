@@ -21,9 +21,7 @@ public class GroupDelecionTests extends TestBase{
   public void testGroupDelecion() {
     List<GroupData> before = app.getGroupHelper().getGroupList();
     int index = before.size() -1;
-    app.getGroupHelper().selectGroup(index);
-    app.getGroupHelper().deleteSelectedGroup();
-    app.getGroupHelper().returnToGroupPage();
+    app.getGroupHelper().deleteGroup(index);
     List<GroupData> after = app.getGroupHelper().getGroupList();
     Assert.assertEquals(after.size(), index);
 
