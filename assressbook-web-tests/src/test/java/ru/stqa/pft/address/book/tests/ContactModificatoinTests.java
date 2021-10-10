@@ -13,7 +13,7 @@ public class ContactModificatoinTests extends TestBase {
   public void ensurePreconditions () {
     if (app.contact().all().size() == 0) {
       app.contact().create(new ContactData().withFirstName("Igor").withLastName("Krasnoborodko")
-              .withNickname("Rashamba").withHome("Voronezh").withMobile("666999").withEmail("test@gmail.com").withBday("27")
+              .withNickname("Rashamba").withHome("222").withMobile("666999").withEmail("test@gmail.com").withBday("27")
               .withBmonth("September").withByear("1993").withAddress2("TestAddress").withPhone2("777"));
     }
   }
@@ -24,7 +24,7 @@ public class ContactModificatoinTests extends TestBase {
     ContactData modifiedContact = before.iterator().next();
     ContactData contact = new ContactData().
             withId(modifiedContact.getId()).withFirstName("Konstantin").withLastName("Krasnoborodko")
-            .withNickname("Rashamba").withHome("Voronezh").withMobile("666999").withEmail("test@gmail.com").withBday("27")
+            .withNickname("Rashamba").withHome("222").withMobile("666999").withEmail("test@gmail.com").withBday("27")
             .withBmonth("September").withByear("1993").withAddress2("TestAddress").withPhone2("777");
     app.contact().modify(contact);
     assertThat(app.contact().count(), equalTo(before.size()));
