@@ -136,6 +136,11 @@ public class ContactData {
     return this;
   }
 
+  public ContactData withPhone2(String phone2) {
+    this.phone2 = phone2;
+    return this;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -154,11 +159,6 @@ public class ContactData {
     result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
     result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
     return result;
-  }
-
-  public ContactData withPhone2(String phone2) {
-    this.phone2 = phone2;
-    return this;
   }
 
 }
