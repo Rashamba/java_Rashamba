@@ -66,6 +66,7 @@ public class ContactHelper extends HelperBase{
   }
 
   public void create(ContactData contact) {
+    returnToContactPage();
     gotoContactCreation();
     fillContactForm(contact);
     submitContactCreation();
@@ -110,8 +111,10 @@ public class ContactHelper extends HelperBase{
       List<WebElement> cells = element.findElements(By.tagName("td"));
       String firstName = cells.get(2).getText();
       String lastName = cells.get(1).getText();
+      String[] phones = cells.get(5).getText().split("\n");
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      contactCache.add(new ContactData().withId(id).withFirstName(firstName).withLastName(lastName));
+      contactCache.add(new ContactData().withId(id).withFirstName(firstName).withLastName(lastName)
+              .withHome(phones[0]).withMobile(phones[1]).withWork(phones[2]));
     }
     return new Contacts(contactCache);
   }
