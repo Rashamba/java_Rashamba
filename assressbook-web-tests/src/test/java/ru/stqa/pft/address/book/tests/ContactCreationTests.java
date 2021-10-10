@@ -13,8 +13,9 @@ public class ContactCreationTests extends TestBase {
   public void testContactCreation() {
     Contacts before = app.contact().all();
     ContactData contact = new ContactData().withFirstName("Igor").withLastName("Krasnoborodko")
-            .withNickname("Rashamba").withHome("222").withMobile("333").withWork("444").withEmail("test@gmail.com").withBday("27")
-            .withBmonth("September").withByear("1993").withAddress2("TestAddress").withPhone2("777");
+            .withNickname("Rashamba").withAddress("Test123").withPhoneHome("222").withMobile("333").withPhoneWork("444")
+            .withEmail("test1@gmail.com").withEmail2("test2@gmail.com").withEmail3("test3@gmail.com").withBday("27")
+            .withBmonth("September").withByear("1993");
     app.contact().create(contact);
     assertThat(app.contact().count(), equalTo(before.size() + 1));
     Contacts after = app.contact().all();
@@ -26,8 +27,9 @@ public class ContactCreationTests extends TestBase {
   public void testBadContactCreation() {
     Contacts before = app.contact().all();
     ContactData contact = new ContactData().withFirstName("Igor'").withLastName("Krasnoborodko")
-            .withNickname("Rashamba").withHome("222").withMobile("333").withWork("444").withEmail("test@gmail.com").withBday("27")
-            .withBmonth("September").withByear("1993").withAddress2("TestAddress").withPhone2("777");
+            .withNickname("Rashamba").withAddress("Test123").withPhoneHome("222").withMobile("333").withPhoneWork("444")
+            .withEmail("test1@gmail.com").withEmail2("test2@gmail.com").withEmail3("test3@gmail.com").withBday("27")
+            .withBmonth("September").withByear("1993");
     app.contact().create(contact);
     assertThat(app.contact().count(), equalTo(before.size()));
     Contacts after = app.contact().all();
