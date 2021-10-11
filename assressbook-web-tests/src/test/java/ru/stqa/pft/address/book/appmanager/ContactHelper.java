@@ -41,12 +41,6 @@ public class ContactHelper extends HelperBase{
     type(By.name("email3"),contactData.getEmail3());
     type(By.name("address2"), contactData.getAddress2());
     type(By.name("phone2"), contactData.getPhone2());
-    wd.findElement(By.name("bday")).click();
-    new Select(wd.findElement(By.name("bday"))).selectByVisibleText(contactData.getBday());
-    wd.findElement(By.name("bmonth")).click();
-    new Select(wd.findElement(By.name("bmonth"))).selectByVisibleText(contactData.getBmonth());
-    type(By.name("byear"), contactData.getByear());
-
   }
 
   private void initContactModifyByID(int id) {
