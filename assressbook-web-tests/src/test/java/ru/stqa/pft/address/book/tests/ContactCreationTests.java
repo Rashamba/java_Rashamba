@@ -27,7 +27,7 @@ public class ContactCreationTests extends TestBase {
     try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.xml")))) {
       String xml = "";
       String line = reader.readLine();
-      while (line != null) {
+      while (line !=null) {
         xml += line;
         line = reader.readLine();
       }
@@ -35,7 +35,7 @@ public class ContactCreationTests extends TestBase {
       xstream.processAnnotations(ContactData.class);
       xstream.allowTypes(new Class[]{ContactData.class});
       List<ContactData> contacts = (List<ContactData>) xstream.fromXML(xml);
-      return contacts.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
+      return contacts.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
     }
   }
 
@@ -50,9 +50,8 @@ public class ContactCreationTests extends TestBase {
         line = reader.readLine();
       }
       Gson gson = new Gson();
-      List<ContactData> groups = gson.fromJson(json, new TypeToken<List<ContactData>>() {
-      }.getType());
-      return groups.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
+      List<ContactData> groups = gson.fromJson(json, new TypeToken<List<ContactData>>() {}.getType());
+      return groups.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
     }
   }
 
@@ -66,7 +65,7 @@ public class ContactCreationTests extends TestBase {
             before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
 
-  @Test(enabled = false)
+  @Test (enabled = false)
   public void testBadContactCreation() {
     Contacts before = app.contact().all();
     ContactData contact = new ContactData().withFirstName("Igor'").withLastName("Krasnoborodko")
