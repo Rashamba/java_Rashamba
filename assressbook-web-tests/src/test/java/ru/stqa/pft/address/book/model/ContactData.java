@@ -3,43 +3,75 @@ package ru.stqa.pft.address.book.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.io.File;
 
+@Entity
+@Table(name = "addressbook")
 @XStreamAlias("contact")
 public class ContactData {
+  @Id
+  @Column(name = "id")
   @XStreamOmitField
   private int id = Integer.MAX_VALUE;
+
   @Expose
+  @Column(name = "firstname")
   private String firstName;
+
   @Expose
+  @Column(name = "lastName")
   private String lastName;
-  private String nickname;
+
   @Expose
+  @Type(type = "text")
+  @Column(name = "address")
   private String address;
-  private String home;
+
   @Expose
+  @Type(type = "text")
+  @Column(name = "mobile")
   private String mobile;
-  private String work;
+
   @Expose
+  @Type(type = "text")
+  @Column(name = "email")
   private String email;
+
+  @Type(type = "text")
+  @Column(name = "home")
+  private String home;
+
+  @Type(type = "text")
+  @Column(name = "work")
+  private String work;
+
+  @Type(type = "text")
+  @Column(name = "email2")
   private String email2;
+
+  @Type(type = "text")
+  @Column(name = "email3")
   private String email3;
-  private String bday;
-  private String bmonth;
-  private String byear;
-  private String address2;
-  private String phone2;
+
+  @Transient
   private String allPhones;
+
+  @Transient
   private String allEmails;
-  private File photo;
+
+  @Type(type = "text")
+  @Column(name = "photo")
+  private String photo;
 
   public File getPhoto() {
-    return photo;
+    return new File(photo);
   }
 
   public ContactData withPhoto(File photo) {
-    this.photo = photo;
+    this.photo = photo.getPath();
     return this;
   }
 
@@ -73,10 +105,6 @@ public class ContactData {
     return lastName;
   }
 
-  public String getNickname() {
-    return nickname;
-  }
-
   public String getAddress() {
     return address;
   }
@@ -105,25 +133,6 @@ public class ContactData {
     return email3;
   }
 
-  public String getBday() {
-    return bday;
-  }
-
-  public String getBmonth() {
-    return bmonth;
-  }
-
-  public String getByear() {
-    return byear;
-  }
-
-  public String getAddress2() {
-    return address2;
-  }
-
-  public String getPhone2() {
-    return phone2;
-  }
 
   @Override
   public String toString() {
@@ -148,11 +157,6 @@ public class ContactData {
 
   public ContactData withLastName(String lastName) {
     this.lastName = lastName;
-    return this;
-  }
-
-  public ContactData withNickname(String nickname) {
-    this.nickname = nickname;
     return this;
   }
 
@@ -191,30 +195,6 @@ public class ContactData {
     return this;
   }
 
-  public ContactData withBday(String bday) {
-    this.bday = bday;
-    return this;
-  }
-
-  public ContactData withBmonth(String bmonth) {
-    this.bmonth = bmonth;
-    return this;
-  }
-
-  public ContactData withByear(String byear) {
-    this.byear = byear;
-    return this;
-  }
-
-  public ContactData withAddress2(String address2) {
-    this.address2 = address2;
-    return this;
-  }
-
-  public ContactData withPhone2(String phone2) {
-    this.phone2 = phone2;
-    return this;
-  }
 
   @Override
   public boolean equals(Object o) {

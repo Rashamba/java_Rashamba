@@ -23,7 +23,7 @@ public class ContactCreationTests extends TestBase {
 
   @DataProvider
   public Iterator<Object[]> validContactsFromXml() throws IOException {
-    File photo = new File("src/test/resources/Cat.jpg");
+    //File photo = new File("src/test/resources/Cat.jpg");
     try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.xml")))) {
       String xml = "";
       String line = reader.readLine();
@@ -50,8 +50,8 @@ public class ContactCreationTests extends TestBase {
         line = reader.readLine();
       }
       Gson gson = new Gson();
-      List<ContactData> groups = gson.fromJson(json, new TypeToken<List<ContactData>>() {}.getType());
-      return groups.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
+      List<ContactData> cotacts = gson.fromJson(json, new TypeToken<List<ContactData>>() {}.getType());
+      return cotacts.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
     }
   }
 
@@ -69,9 +69,8 @@ public class ContactCreationTests extends TestBase {
   public void testBadContactCreation() {
     Contacts before = app.contact().all();
     ContactData contact = new ContactData().withFirstName("Igor'").withLastName("Krasnoborodko")
-            .withNickname("Rashamba").withAddress("Test123").withPhoneHome("222").withMobile("333").withPhoneWork("444")
-            .withEmail("test1@gmail.com").withEmail2("test2@gmail.com").withEmail3("test3@gmail.com").withBday("27")
-            .withBmonth("September").withByear("1993");
+            .withAddress("Test123").withPhoneHome("222").withMobile("333").withPhoneWork("444")
+            .withEmail("test1@gmail.com").withEmail2("test2@gmail.com").withEmail3("test3@gmail.com");
     app.contact().create(contact);
     assertThat(app.contact().count(), equalTo(before.size()));
     Contacts after = app.contact().all();
