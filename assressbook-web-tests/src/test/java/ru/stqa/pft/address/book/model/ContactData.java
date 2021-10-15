@@ -17,6 +17,9 @@ public class ContactData {
   @XStreamOmitField
   private int id = Integer.MAX_VALUE;
 
+  @Column(name = "deprecated", columnDefinition = "datetime")
+  private String deprecated;
+
   @Expose
   @Column(name = "firstname")
   private String firstName;
