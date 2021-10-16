@@ -6,6 +6,7 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import ru.stqa.pft.address.book.model.ContactData;
+import ru.stqa.pft.address.book.model.Contacts;
 import ru.stqa.pft.address.book.model.GroupData;
 import ru.stqa.pft.address.book.model.Groups;
 
@@ -30,5 +31,14 @@ public class DbHelper {
     session.getTransaction().commit();
     session.close();
     return new Groups(result);
+  }
+
+  public Contacts contacts() {
+    Session session = sessionFactory.openSession();
+    session.beginTransaction();
+    List<ContactData> result = session.createQuery("from ContactData where deprecated = '0000-00-00'").list();
+    session.getTransaction().commit();
+    session.close();
+    return new Contacts(result);
   }
 }
