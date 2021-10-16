@@ -14,9 +14,11 @@ import java.io.File;
 public class ContactData {
   @Id
   @Column(name = "id")
+  @Type(type = "int")
   @XStreamOmitField
   private int id = Integer.MAX_VALUE;
 
+  @Transient
   @Column(name = "deprecated", columnDefinition = "datetime")
   private String deprecated;
 
@@ -43,18 +45,22 @@ public class ContactData {
   @Column(name = "email")
   private String email;
 
+  @Transient
   @Type(type = "text")
   @Column(name = "home")
   private String home;
 
+  @Transient
   @Type(type = "text")
   @Column(name = "work")
   private String work;
 
+  @Transient
   @Type(type = "text")
   @Column(name = "email2")
   private String email2;
 
+  @Transient
   @Type(type = "text")
   @Column(name = "email3")
   private String email3;
@@ -65,6 +71,7 @@ public class ContactData {
   @Transient
   private String allEmails;
 
+  @Transient
   @Type(type = "text")
   @Column(name = "photo")
   private String photo;
