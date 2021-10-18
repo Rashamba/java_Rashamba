@@ -7,6 +7,8 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "addressbook")
@@ -18,7 +20,7 @@ public class ContactData {
   @XStreamOmitField
   private int id = Integer.MAX_VALUE;
 
-  @Transient
+
   @Column(name = "deprecated", columnDefinition = "datetime")
   private String deprecated;
 
@@ -76,6 +78,11 @@ public class ContactData {
   @Column(name = "photo")
   private String photo;
 
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable (name = "address_in_groups",
+          joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+  private Set<GroupData> groups = new HashSet<GroupData>();
+
   public File getPhoto() {
     return new File(photo);
   }
@@ -83,6 +90,10 @@ public class ContactData {
   public ContactData withPhoto(File photo) {
     this.photo = photo.getPath();
     return this;
+  }
+
+  public Groups getGroups() {
+    return new Groups(groups);
   }
 
   public String getAllEmails() {
