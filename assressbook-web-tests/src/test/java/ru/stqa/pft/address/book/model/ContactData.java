@@ -1,19 +1,107 @@
 package ru.stqa.pft.address.book.model;
 
+import com.google.gson.annotations.Expose;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
+import java.io.File;
+
+@Entity
+@Table(name = "addressbook")
+@XStreamAlias("contact")
 public class ContactData {
+  @Id
+  @Column(name = "id")
+  @Type(type = "int")
+  @XStreamOmitField
   private int id = Integer.MAX_VALUE;
+
+  @Transient
+  @Column(name = "deprecated", columnDefinition = "datetime")
+  private String deprecated;
+
+  @Expose
+  @Column(name = "firstname")
   private String firstName;
+
+  @Expose
+  @Column(name = "lastName")
   private String lastName;
-  private String nickname;
-  private String home;
+
+  @Expose
+  @Type(type = "text")
+  @Column(name = "address")
+  private String address;
+
+  @Expose
+  @Type(type = "text")
+  @Column(name = "mobile")
   private String mobile;
-  private String work;
+
+  @Expose
+  @Type(type = "text")
+  @Column(name = "email")
   private String email;
-  private String bday;
-  private String bmonth;
-  private String byear;
-  private String address2;
-  private String phone2;
+
+  @Transient
+  @Type(type = "text")
+  @Column(name = "home")
+  private String home;
+
+  @Transient
+  @Type(type = "text")
+  @Column(name = "work")
+  private String work;
+
+  @Transient
+  @Type(type = "text")
+  @Column(name = "email2")
+  private String email2;
+
+  @Transient
+  @Type(type = "text")
+  @Column(name = "email3")
+  private String email3;
+
+  @Transient
+  private String allPhones;
+
+  @Transient
+  private String allEmails;
+
+  @Transient
+  @Type(type = "text")
+  @Column(name = "photo")
+  private String photo;
+
+  public File getPhoto() {
+    return new File(photo);
+  }
+
+  public ContactData withPhoto(File photo) {
+    this.photo = photo.getPath();
+    return this;
+  }
+
+  public String getAllEmails() {
+    return allEmails;
+  }
+
+  public ContactData withAllEmails(String allEmails) {
+    this.allEmails = allEmails;
+    return this;
+  }
+
+  public String getAllPhones() {
+    return allPhones;
+  }
+
+  public ContactData withAllPhones(String allPhones) {
+    this.allPhones = allPhones;
+    return this;
+  }
 
   public int getId() {
     return id;
@@ -27,8 +115,8 @@ public class ContactData {
     return lastName;
   }
 
-  public String getNickname() {
-    return nickname;
+  public String getAddress() {
+    return address;
   }
 
   public String getHome() {
@@ -47,32 +135,23 @@ public class ContactData {
     return email;
   }
 
-  public String getBday() {
-    return bday;
+  public String getEmail2() {
+    return email2;
   }
 
-  public String getBmonth() {
-    return bmonth;
+  public String getEmail3() {
+    return email3;
   }
 
-  public String getByear() {
-    return byear;
-  }
-
-  public String getAddress2() {
-    return address2;
-  }
-
-  public String getPhone2() {
-    return phone2;
-  }
 
   @Override
   public String toString() {
     return "ContactData{" +
-            "id='" + id + '\'' +
-            ", firstName='" + firstName + '\'' +
+            "firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
+            ", address='" + address + '\'' +
+            ", mobile='" + mobile + '\'' +
+            ", email='" + email + '\'' +
             '}';
   }
 
@@ -91,12 +170,12 @@ public class ContactData {
     return this;
   }
 
-  public ContactData withNickname(String nickname) {
-    this.nickname = nickname;
+  public ContactData withAddress(String address) {
+    this.address = address;
     return this;
   }
 
-  public ContactData withHome(String home) {
+  public ContactData withPhoneHome(String home) {
     this.home = home;
     return this;
   }
@@ -106,7 +185,7 @@ public class ContactData {
     return this;
   }
 
-  public ContactData withWork(String work) {
+  public ContactData withPhoneWork(String work) {
     this.work = work;
     return this;
   }
@@ -116,25 +195,16 @@ public class ContactData {
     return this;
   }
 
-  public ContactData withBday(String bday) {
-    this.bday = bday;
+  public ContactData withEmail2(String email2) {
+    this.email2 = email2;
     return this;
   }
 
-  public ContactData withBmonth(String bmonth) {
-    this.bmonth = bmonth;
+  public ContactData withEmail3(String email3) {
+    this.email3 = email3;
     return this;
   }
 
-  public ContactData withByear(String byear) {
-    this.byear = byear;
-    return this;
-  }
-
-  public ContactData withAddress2(String address2) {
-    this.address2 = address2;
-    return this;
-  }
 
   @Override
   public boolean equals(Object o) {
@@ -145,7 +215,10 @@ public class ContactData {
 
     if (id != that.id) return false;
     if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
-    return lastName != null ? lastName.equals(that.lastName) : that.lastName == null;
+    if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
+    if (address != null ? !address.equals(that.address) : that.address != null) return false;
+    if (mobile != null ? !mobile.equals(that.mobile) : that.mobile != null) return false;
+    return email != null ? email.equals(that.email) : that.email == null;
   }
 
   @Override
@@ -153,12 +226,9 @@ public class ContactData {
     int result = id;
     result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
     result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+    result = 31 * result + (address != null ? address.hashCode() : 0);
+    result = 31 * result + (mobile != null ? mobile.hashCode() : 0);
+    result = 31 * result + (email != null ? email.hashCode() : 0);
     return result;
   }
-
-  public ContactData withPhone2(String phone2) {
-    this.phone2 = phone2;
-    return this;
-  }
-
 }
