@@ -12,6 +12,6 @@ public class RegistrationHelper {
   }
 
   public void start(String username, String email) {
-    wd.get(app.getProperty("web.baseUrl") + "/login_page.php?return=%2Fmantisbt-2.25.2%2Faccount_page.php");
+    wd.get(app.getProperty("web.baseUrl") + "/signup_page.php");
   }
 }
