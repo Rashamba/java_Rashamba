@@ -19,6 +19,7 @@ public class ApplicationManager {
   private String browser;
   private RegistrationHelper registrationHelper;
   private FtpHelper ftp;
+  private MailHelper mailHelper;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -58,6 +59,7 @@ public class ApplicationManager {
     return ftp;
   }
 
+
   public WebDriver getDriver() {
     if (wd == null) {
       if (browser.equals(BrowserType.CHROME)) {
@@ -71,5 +73,12 @@ public class ApplicationManager {
       wd.get(properties.getProperty("web.baseUrl"));
     }
     return wd;
+  }
+
+  public MailHelper mail() {
+    if (mailHelper == null) {
+      mailHelper = new MailHelper(this);
+    }
+    return mailHelper;
   }
 }
